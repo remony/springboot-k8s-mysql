@@ -36,7 +36,7 @@ stages {
 
         stage('Build Maven'){
         steps {
-                sh 'mvn clean package -f springboot-k8s-mysql/'
+                sh 'mvn clean package -f springboot-k8s-mysql/ -Dmaven.test.skip=true'
             }//end of steps
         
         }//end of stage Build Maven
