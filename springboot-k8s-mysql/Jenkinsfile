@@ -10,12 +10,10 @@ pipeline {
                labels: 
                  kube: slave-dev
              spec:
-               volumes:
                containers:
                - name: jnlp
                  image: remony/inbound-agent
                  tty: true
-
                - name: dind
                  image: docker:18.09-dind
                  tty: true
