@@ -27,8 +27,8 @@ pipeline {
                  - name: docker-graph-storage 
                    mountPath: /var/lib/docker 
              volumes: 
-             - name: docker-graph-storage 
-               emptyDir: {}
+               - name: docker-graph-storage 
+                 emptyDir: {}
              """
 }//end of kubernetes
  }//end of agent
