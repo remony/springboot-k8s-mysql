@@ -1,0 +1,47 @@
+pipeline {
+ agent {
+      kubernetes {
+  label 'slave-dev'
+        	  defaultContainer 'jnlp'
+           yaml """
+             apiVersion: v1
+             kind: Pod
+             metadata:
+               labels: 
+                 kube: slave-dev
+             spec:
+               volumes:
+               containers:
+               - name: jnlp
+                 image: remony/inbound-agent
+                 tty: true
+
+               - name: dind
+                 image: docker:18.09-dind
+                 tty: true
+                 securityContext:
+                   privileged: true
+                 env:
+                 - name: DOCKER_HOST
+                   value: 127.0.0.1
+             """
+}//end of kubernetes
+ }//end of agent
+
+tools {
+    maven 'maven' 
+  }
+ 
+stages {
+
+        stage('Build Maven'){
+        steps {
+                sh 'mvn clean package -f springboot-k8s-mysql/'
+            }//end of steps
+        
+        }//end of stage Build Maven
+
+}//end of stages
+
+
+}//end of pipeline
