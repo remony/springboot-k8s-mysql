@@ -10,25 +10,35 @@ pipeline {
                labels: 
                  kube: slave-dev
              spec:
+               volumes:
+                 - name: docker-graph-storage 
+                     emptyDir: {}
                containers:
                - name: jnlp
-                 image: remony/inbound-agent
+                 image: 1445442/inbound-agent
                  tty: true
+                 envFrom:
+                 - secretRef:
+                     name: azurecred
+                 volumeMounts:
+                 - name: "devconfig"
+                   mountPath: "/.kube/devconfig"
+                 - name: "prodconfig"
+                   mountPath: "/.kube/prodconfig"
+
                - name: docker-cmds 
                  image: docker:1.12.6 
                  env: 
-                   - name: DOCKER_HOST 
-                     value: tcp://localhost:2375 
+                 - name: DOCKER_HOST 
+                   value: tcp://localhost:2375 
+				   
                - name: dind-daemon 
                  image: docker:1.12.6-dind 
                  securityContext: 
                    privileged: true 
                  volumeMounts: 
                  - name: docker-graph-storage 
-                   mountPath: /var/lib/docker 
-             volumes: 
-               - name: docker-graph-storage 
-                 emptyDir: {}
+                   mountPath: /var/lib/docker
              """
 }//end of kubernetes
  }//end of agent
