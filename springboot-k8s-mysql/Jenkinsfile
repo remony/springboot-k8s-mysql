@@ -43,6 +43,7 @@ stages {
  
         stage('Build docker Image'){
         steps {
+         container('jnlp') {
                 sh 'docker build -t remony/springboot-k8s-mysql:${BUILD_NUMBER} -f springboot-k8s-mysql/Dockerfile springboot-k8s-mysql/.'
             }//end of steps
         
