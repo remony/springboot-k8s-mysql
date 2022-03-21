@@ -40,6 +40,13 @@ stages {
             }//end of steps
         
         }//end of stage Build Maven
+ 
+        stage('Build docker Image'){
+        steps {
+                sh 'docker build -t 1445442/digicust-${SERVICE} -f springboot-k8s-mysql/Dockerfile springboot-k8s-mysql/.'
+            }//end of steps
+        
+        }//end of stage Build docker
 
 }//end of stages
 
