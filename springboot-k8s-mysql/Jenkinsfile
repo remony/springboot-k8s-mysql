@@ -14,14 +14,21 @@ pipeline {
                - name: jnlp
                  image: remony/inbound-agent
                  tty: true
-               - name: dind
-                 image: docker:18.09-dind
-                 tty: true
-                 securityContext:
-                   privileged: true
-                 env:
-                 - name: DOCKER_HOST
-                   value: tcp://localhost:2375
+               - name: docker-cmds 
+                 image: docker:1.12.6 
+                 env: 
+                   - name: DOCKER_HOST 
+                     value: tcp://localhost:2375 
+               - name: dind-daemon 
+                 image: docker:1.12.6-dind 
+                 securityContext: 
+                   privileged: true 
+                 volumeMounts: 
+                 - name: docker-graph-storage 
+                   mountPath: /var/lib/docker 
+             volumes: 
+             - name: docker-graph-storage 
+               emptyDir: {}
              """
 }//end of kubernetes
  }//end of agent
