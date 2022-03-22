@@ -35,7 +35,7 @@ pipeline {
  }//end of agent
 
 tools {
-    maven 'maven' 
+    maven 'maven'
   }
  
 stages {
