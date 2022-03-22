@@ -2,7 +2,7 @@ pipeline {
  agent {
       kubernetes {
   label 'slave-dev'
-        	  defaultContainer 'jnlp'
+            defaultContainer 'jnlp'
            yaml """
              apiVersion: v1
              kind: Pod
