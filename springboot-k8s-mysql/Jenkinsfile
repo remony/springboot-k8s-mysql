@@ -50,6 +50,20 @@ stages {
         
         }//end of stage Build docker
 
+        stage('Deploy To Environment'){
+            steps{
+                withKubeConfig([credentialsId: 'k8s', serverUrl: 'https://kubernetes.default']){
+					sh """
+
+          kubectl create deployment demo --image=remony/springboot-k8s-mysql:${BUILD_NUMBER} --dry-run -o=yaml > deployment.yaml
+          echo --- >> deployment.yaml
+          kubectl create service clusterip demo --tcp=8080:8080 --dry-run -o=yaml >> deployment.yaml
+          
+          """
+											}
+				}
+										}
+
 }//end of stages
 
 
