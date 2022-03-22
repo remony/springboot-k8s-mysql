@@ -11,7 +11,7 @@ pipeline {
                  kube: slave-dev
              spec:
                volumes:
-                 - name: docker-graph-storage 
+                 - name: docker-graph-storage
                    emptyDir: {}
                containers:
                - name: jnlp
