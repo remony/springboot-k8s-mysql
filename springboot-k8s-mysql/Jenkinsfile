@@ -10,6 +10,10 @@ pipeline {
                labels: 
                  kube: slave-dev
              spec:
+               volumes:
+               - name: host-mount
+                 hostPath:
+                   path: /var/run/docker.sock
                containers:
                - name: jnlp
                  image: imperialplugins/jenkins-inbound-agent-dind
@@ -19,10 +23,7 @@ pipeline {
                  volumeMounts:
                    - name: host-mount
                      mountPath: /var/run/docker.sock
-              volumes:
-               - name: host-mount
-                 hostPath:
-                   path: /var/run/docker.sock
+              
              """
 }//end of kubernetes
  }//end of agent
