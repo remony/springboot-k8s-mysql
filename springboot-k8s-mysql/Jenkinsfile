@@ -17,13 +17,12 @@ pipeline {
                - name: jnlp
                  image: remony/inbound-agent
                  tty: true
-
+		 
                - name: docker-cmds 
                  image: docker:1.12.6 
                  env: 
                  - name: DOCKER_HOST 
                    value: tcp://localhost:2375 
-				   
                - name: dind-daemon 
                  image: docker:1.12.6-dind 
                  securityContext: 
