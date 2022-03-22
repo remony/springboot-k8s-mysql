@@ -16,6 +16,13 @@ pipeline {
                  tty: true
                  securityContext:
                    privileged: true
+                 volumeMounts:
+                   - name: host-mount
+                     mountPath: /var/run/docker.sock
+              volumes:
+               - name: host-mount
+                 hostPath:
+                   path: /var/run/docker.sock
              """
 }//end of kubernetes
  }//end of agent
