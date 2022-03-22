@@ -58,9 +58,9 @@ stages {
           wget https://storage.googleapis.com/kubernetes-release/release/v1.20.5/bin/linux/amd64/kubectl
           chmod u+x ./kubectl
           cp kubectl /usr/bin
-          
+
           kubectl create deployment demo --image=remony/springboot-k8s-mysql:${BUILD_NUMBER} -n default
-          kubectl create service clusterip demo --tcp=8080:8080  -n default
+          kubectl create service LoadBalancer demo --tcp=8080:8080  -n default
           
           """
 											}
