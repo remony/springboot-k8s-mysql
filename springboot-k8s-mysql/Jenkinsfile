@@ -16,7 +16,7 @@ pipeline {
                containers:
                - name: jnlp
                  image: remony/inbound-agent
-                 tty: true
+		 tty: true
 		 
                - name: docker-cmds 
                  image: docker:1.12.6 
