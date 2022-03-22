@@ -18,7 +18,10 @@ pipeline {
                  image: remony/inbound-agent
                  tty: true
                - name: dind-daemon 
-                 image: docker:1.12.6-dind 
+                 image: docker:1.12.6-dind
+                 env: 
+                 - name: DOCKER_HOST 
+                   value: tcp://localhost:2375
                  securityContext: 
                    privileged: true 
                  volumeMounts: 
