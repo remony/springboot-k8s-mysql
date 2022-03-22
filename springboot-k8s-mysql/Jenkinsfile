@@ -15,7 +15,7 @@ pipeline {
                    emptyDir: {}
                containers:
                - name: jnlp
-	         image: remony/inbound-agent
+                 image: remony/inbound-agent
 		 tty: true
                - name: docker-cmds 
                  image: docker:1.12.6 
